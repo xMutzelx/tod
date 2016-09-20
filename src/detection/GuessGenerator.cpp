@@ -87,9 +87,7 @@ namespace tod
       inputs.declare<cv::Mat>("points3d", "The height by width 3 channel point cloud");
       inputs.declare<std::vector<cv::KeyPoint> >("keypoints", "The interesting keypoints");
       inputs.declare<std::vector<std::vector<cv::DMatch> > >("matches", "The list of OpenCV DMatch");
-      inputs.declare<std::vector<cv::Mat> >(
-          "matches_3d",
-          "The corresponding 3d position of those matches. For each point, a 1 by n 3 channel matrix (for x,y and z)");
+      inputs.declare<std::vector<cv::Mat> >("matches_3d","The corresponding 3d position of those matches. For each point, a 1 by n 3 channel matrix (for x,y and z)");
       inputs.declare<std::map<ObjectId, float> >("spans", "For each found object, its span based on known features.");
       inputs.declare<std::vector<ObjectId> >("object_ids", "The ids used in the matches");
 
@@ -133,13 +131,12 @@ namespace tod
       const std::vector<cv::Mat> & matches_3d = inputs.get<std::vector<cv::Mat> >("matches_3d");
 
       // Get the original keypoints and point cloud
-      const std::vector<cv::KeyPoint> & keypoints = inputs.get<std::vector<cv::KeyPoint> >("keypoints");
+      const std::vector<cv::KeyPoint> & keypoints = inputs.get<std::vector<cv::KeyPoint> >("keypoints");    
       const cv::Mat point_cloud = inputs.get<cv::Mat>("points3d");
       const std::vector<ObjectId> & object_ids_in = inputs.get<std::vector<ObjectId> >("object_ids");
       const std::map<ObjectId, float> & spans = inputs.get<std::map<ObjectId, float> >("spans");
-
-      const cv::Mat & initial_image = inputs.get<cv::Mat>("image");
-
+      const cv::Mat & initial_image = inputs.get<cv::Mat>("image"); 
+                             
       // Get the outputs
       pose_results_->clear();
       Rs_->clear();
